@@ -42,6 +42,7 @@ $fili=fopen("../database.txt","r");
 $read=fread($fili,  filesize("../database.txt"));
 $data=explode(',',$read);
 $active_group = 'default';
+echo $data[0]." ".$data[1]." ".$data[2]." ".$data[3];
 $active_record = TRUE;
 $db['default']['hostname'] = $data[0];
 $db['default']['username'] = $data[1];
