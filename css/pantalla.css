@@ -1,0 +1,15 @@
+#error{
+	border:1px solid #FF0000;
+	margin:5px 0;
+	color:#FF0000;
+	font-weight:bold;background:#ffe5e5;
+	padding:10px 10px 10px 25px;
+}
+#info{
+	border:1px solid #1cb1dc;
+	margin:5px 0;
+	color:#1cb1dc;
+	font-weight:bold;background:#ddfcc1;
+	padding:10px 10px 10px 25px;
+}
+

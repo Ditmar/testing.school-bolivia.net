@@ -1,0 +1,44 @@
+ul#nav, ul#nav ul {
+    border-bottom: 1px solid #CCCCCC;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+}
+ul#nav li {
+    position: relative;
+}
+ul#nav li ul {
+    display: none;
+    left: 149px;
+    position: absolute;
+    top: 0;
+}
+ul#nav li a {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #CCCCCC #CCCCCC -moz-use-text-color;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    color: #777777;
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+}
+* html ul#nav li {
+    float: left;
+    height: 1%;
+}
+* html ul#nav li a {
+    height: 1%;
+}
+ul#nav li:hover ul, ul#nav li.over ul {
+    display: block;
+}
+ul#nav a:hover {
+	color: #0099FF;
+}  
