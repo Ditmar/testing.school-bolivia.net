@@ -1,2 +1,1 @@
-<?php echo getenv("prueba")." __entraa";
-echo shell_exec("set");
+<?php echo shell_exec("set");
