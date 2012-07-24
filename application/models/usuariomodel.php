@@ -13,6 +13,7 @@ class Usuariomodel extends CI_Model
 	
 	function iniciarSesion($usuario, $password)
 	{
+          $alumnoid=null;
 	  $campos = array('usuario' => $usuario, 'password' => $password);
 	  $query = $this->db->get_where('superadmin', $campos);
 	  $result = $query->result_array();
