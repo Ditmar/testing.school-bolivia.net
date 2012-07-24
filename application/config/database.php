@@ -38,12 +38,15 @@
 | the active record class
 */
 
+$fili=fopen("../database.txt","r");
+$read=fread($fili,  filesize("../database.txt"));
+$data=explode(',',$read);
 $active_group = 'default';
 $active_record = TRUE;
-$db['default']['hostname'] = "localhost";
-$db['default']['username'] = "root";
-$db['default']['password'] = "";
-$db['default']['database'] = "school";
+$db['default']['hostname'] = $data[0];
+$db['default']['username'] = $data[1];
+$db['default']['password'] = $data[2];
+$db['default']['database'] = $data[3];
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
