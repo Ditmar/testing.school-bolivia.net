@@ -1,1 +1,1 @@
-<?php echo getenv("prueba");
+<?php echo getenv("prueba")." __entraa";
