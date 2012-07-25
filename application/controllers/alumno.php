@@ -8,10 +8,7 @@ class Alumno extends CI_Controller
 		autorizar_ingreso();
 	}
 
-	function Alumno()
-	{
-		parent::CI_Controller();
-	}
+	
 
 	function bienvenido()
 	{

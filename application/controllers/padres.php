@@ -233,6 +233,28 @@
             
             $this->smarty->view("padres/registrar.tpl");
         }
+        function getpadres()
+        {
+            $this->load->model("padremodel");
+            $r=$this->padremodel->getpadres($this->session->userdata("idCole"));
+            
+            $l=array();
+            for($i=0;$i<count($r);$i++)
+            {
+            	$l[]=$r[i]["nombre"]." ".$r[$i]["apellido"];
+            }
+            echo json_encode(array("data"=>$r,"labels"=>$l));
+        }
+        function getestudiantes()
+        {
+            $this->load->model("alumnomodel");
+            $r=$this->alumnomodel->todosLosAlumnos($this->session->userdata("idCole"));
+            $arr=array();
+            for($i=0;$i<count($r);$i++){
+                $arr[]=$r[$i]["nombre"]." ".$r[$i]["apellido"];
+            }
+            echo json_encode(array("datos"=>$r,"labels"=>$arr));
+        }
         function crear()
         {   if(!esPadre())
 		      redirect("administrador/iniciarSesion");

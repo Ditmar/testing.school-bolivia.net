@@ -95,11 +95,13 @@ class Alumnomodel extends CI_Model
 			$cursoQuery = $this->db->query('SELECT * FROM curso WHERE curso_id = ' . $idCurso . '');
 			return $cursoQuery->result_array();
 		}
-
+                /*
+                 * regresa una cantidad maxima de 1300 alumnos de un solo golpe
+                 */
 		function todosLosAlumnos($idCole)
 		{
 			//$idCole = $this->session->userdata('idCole');
-			$alumnosQuery = $this->db->query('SELECT * FROM alumno WHERE colegio_id ='.$this->db->escape($idCole).'');
+			$alumnosQuery = $this->db->query('SELECT * FROM alumno WHERE colegio_id ='.$this->db->escape($idCole).' limit 1300');
 			return $alumnosQuery->result_array();
 		}
 

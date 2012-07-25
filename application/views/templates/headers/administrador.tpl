@@ -12,12 +12,16 @@
         <link href='http://fonts.googleapis.com/css?family=Quicksand|Jura' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'/>
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
+        <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
+        
+
         <!--[if lte IE 8]>
             <script src="/js/html5.js" ></script>
         <![endif]-->
-        
+        <script type="text/javascript" src="/js/jquery.js" ></script>
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
+        <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
         <script>
             {literal}
                 

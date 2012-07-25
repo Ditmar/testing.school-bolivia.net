@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-21 01:32:08
+<?php /* Smarty version 2.6.26, created on 2012-07-25 06:00:16
          compiled from headers/administrador.tpl */ ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,12 +18,16 @@ unset($_smarty_tpl_vars);
         <link href='http://fonts.googleapis.com/css?family=Quicksand|Jura' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'/>
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
+        <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
+        
+
         <!--[if lte IE 8]>
             <script src="/js/html5.js" ></script>
         <![endif]-->
-        
+        <script type="text/javascript" src="/js/jquery.js" ></script>
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
+        <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
         <script>
             <?php echo '
                 

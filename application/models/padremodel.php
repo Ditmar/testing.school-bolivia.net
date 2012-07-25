@@ -20,7 +20,12 @@
         {
             $name=$this->nombre . " " . $this->apellido;
             return $name;
-        } 
+        }
+        function getpadres($idCol)
+        {
+            $query=$this->db->get_where("padres",array('colegio_id'=>$idCol));
+            return $query->result_array();
+        }
         function registrar($padres)
         {
             
