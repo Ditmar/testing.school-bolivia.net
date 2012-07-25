@@ -1,1 +1,1 @@
-<?php echo phpinfo();
+<?php $data = new Spreadsheet_Excel_Reader();
