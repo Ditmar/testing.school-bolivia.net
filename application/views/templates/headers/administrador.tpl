@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Administrador</title>
-  {include file="scripts.tpl"}
   <!--  Mis estilos  -->
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'/>
@@ -14,14 +13,15 @@
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
         <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
         
-
+{include file="scripts.tpl"}
+  
         <!--[if lte IE 8]>
             <script src="/js/html5.js" ></script>
         <![endif]-->
-        <script type="text/javascript" src="/js/jquery.js" ></script>
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
+        <script type="text/javascript" src="/js/jquery.uploadify-3.1.min.js" ></script>
         <script>
             {literal}
                 

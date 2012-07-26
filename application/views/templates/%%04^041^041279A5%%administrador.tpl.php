@@ -1,15 +1,10 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-25 06:00:16
+<?php /* Smarty version 2.6.26, created on 2012-07-26 08:07:27
          compiled from headers/administrador.tpl */ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Administrador</title>
-  <?php $_smarty_tpl_vars = $this->_tpl_vars;
-$this->_smarty_include(array('smarty_include_tpl_file' => "scripts.tpl", 'smarty_include_vars' => array()));
-$this->_tpl_vars = $_smarty_tpl_vars;
-unset($_smarty_tpl_vars);
- ?>
   <!--  Mis estilos  -->
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'/>
@@ -20,14 +15,19 @@ unset($_smarty_tpl_vars);
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
         <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
         
-
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "scripts.tpl", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+  
         <!--[if lte IE 8]>
             <script src="/js/html5.js" ></script>
         <![endif]-->
-        <script type="text/javascript" src="/js/jquery.js" ></script>
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
+        <script type="text/javascript" src="/js/jquery.uploadify-3.1.min.js" ></script>
         <script>
             <?php echo '
                 

@@ -1,10 +1,26 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-24 05:57:14
+<?php /* Smarty version 2.6.26, created on 2012-07-26 08:13:19
          compiled from administrador/inscribirAlumno.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/administrador.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+<script>
+    <?php echo '
+    $(document).ready(function() {
+  $(\'#upload_file\').uploadify({
+    \'swf\'  : \'/js/uploadify.swf\',
+    \'uploader\'    : \'/alumno/subirlista\',
+    \'buttonText\' : \'Select image\',
+    \'auto\'      : true,
+   onComplete   : function(event, id, fileObj, resp, data){
+                    alert(resp);
+                 }
+    });
+});
+    '; ?>
+
+</script>
 <div class="span-12 append-3 prepend-3 last">
 <div <?php echo $this->_tpl_vars['divError']; ?>
  class="error">
@@ -76,12 +92,65 @@ $this->_sections['numero']['last']       = ($this->_sections['numero']['iteratio
         <input class="boton" type="submit" name="asignarBtn" id="asignarBtn" value="Inscribir" />
     </div>
 </form>
-</br>
-<ul class="minmenu">
-    <li>
-        <a href="/administrador/bienvenido"> Volver al menu principal</a>
-    </li>
-</ul>
+<fieldset>
+    <legend>
+        Importar Lista de alumnos CVS
+    </legend>
+    <a href="#">Ayuda</a>
+    <form action="/alumno/subirlista" enctype="multipart/form-data" method="post">
+    <table class="buscartable">
+        <tr>
+            <td>
+                <label>Importar </label>
+            </td>
+            <td>
+                <input id="upload_file" type="file" name="upload_file" value="Subir Lista en CVS"/>
+                <input type="submit" value="Enviar"/>
+            </td>
+            <td>
+        <select name="curso_corresponde" id="curso_corresponde">
+    		<option value="">Seleccione un curso</option>
+          <?php unset($this->_sections['numero']);
+$this->_sections['numero']['loop'] = is_array($_loop=$this->_tpl_vars['cursos']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$this->_sections['numero']['name'] = 'numero';
+$this->_sections['numero']['show'] = true;
+$this->_sections['numero']['max'] = $this->_sections['numero']['loop'];
+$this->_sections['numero']['step'] = 1;
+$this->_sections['numero']['start'] = $this->_sections['numero']['step'] > 0 ? 0 : $this->_sections['numero']['loop']-1;
+if ($this->_sections['numero']['show']) {
+    $this->_sections['numero']['total'] = $this->_sections['numero']['loop'];
+    if ($this->_sections['numero']['total'] == 0)
+        $this->_sections['numero']['show'] = false;
+} else
+    $this->_sections['numero']['total'] = 0;
+if ($this->_sections['numero']['show']):
+
+            for ($this->_sections['numero']['index'] = $this->_sections['numero']['start'], $this->_sections['numero']['iteration'] = 1;
+                 $this->_sections['numero']['iteration'] <= $this->_sections['numero']['total'];
+                 $this->_sections['numero']['index'] += $this->_sections['numero']['step'], $this->_sections['numero']['iteration']++):
+$this->_sections['numero']['rownum'] = $this->_sections['numero']['iteration'];
+$this->_sections['numero']['index_prev'] = $this->_sections['numero']['index'] - $this->_sections['numero']['step'];
+$this->_sections['numero']['index_next'] = $this->_sections['numero']['index'] + $this->_sections['numero']['step'];
+$this->_sections['numero']['first']      = ($this->_sections['numero']['iteration'] == 1);
+$this->_sections['numero']['last']       = ($this->_sections['numero']['iteration'] == $this->_sections['numero']['total']);
+?>
+	          <option value="<?php echo $this->_tpl_vars['id'][$this->_sections['numero']['index']]; ?>
+" <?php if ($this->_tpl_vars['cursos'][$this->_sections['numero']['index']] == $_POST['curso_corresponde']): ?> selected="selected" <?php endif; ?> <?php if ($this->_tpl_vars['cursos'][$this->_sections['numero']['index']] == $this->_tpl_vars['cursillo']): ?> selected="selected"<?php endif; ?>><?php echo $this->_tpl_vars['cursos'][$this->_sections['numero']['index']]; ?>
+</option>
+		  <?php endfor; endif; ?>
+        </select><?php echo $this->_tpl_vars['errorCurso']; ?>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo $this->_tpl_vars['msn']; ?>
+
+            </td>
+        </tr>
+    </table>
+</form>
+</fieldset>
 </div>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "footers/administrador.tpl", 'smarty_include_vars' => array()));
