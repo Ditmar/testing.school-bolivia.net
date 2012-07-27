@@ -15,9 +15,7 @@ class Alumno extends CI_Controller {
     }
 
     function inscribirAlumno($m=null) {
-        if (isset($_POST['PHPSESSID'])) {
-            $_COOKIE['PHPSESSID'] = $_POST['PHPSESSID'];
-        }
+        
         if ($m == 1) {
             $salida['msn'] = "La lista se importo con éxito";
             $salida['save'] = true;
