@@ -5,11 +5,6 @@ class Usuariomodel extends CI_Model
 	{
 		parent::__construct();
 	}
-
-	function Usuariomodel()
-	{
-		parent::CI_Model();
-	}
 	
 	function iniciarSesion($usuario, $password)
 	{
@@ -167,8 +162,9 @@ class Usuariomodel extends CI_Model
 
 	function existeNomUsuarioAlumno($nomUsuario)
 	{
-		$existe = $this->db->query('SELECT * FROM alumno WHERE usuario = ' . $this->db->escape($nomUsuario).'');
-		if($existe->num_rows() > 0)
+		//$existe = $this->db->query('SELECT * FROM alumno WHERE usuario = ' . $this->db->escape($nomUsuario).'');
+		$existe =$this->db->get_where("alumno",array("usuario"=>$nomUsuario));
+        if($existe->num_rows() > 0)
 			return true;
 		else
 		{
