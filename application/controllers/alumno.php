@@ -91,7 +91,7 @@ class Alumno extends CI_Controller {
                 $alumno = $this->alumnomodel->crear($data);
                 $this->inscripcionmodel->inscribir($alumno->id(), $id_cur);
             }
-            //$this->session->unset_userdata("csvfilename");
+            $this->session->unset_userdata("csvfilename");
             echo json_encode(array("success"=>true));
             return ;
         }
