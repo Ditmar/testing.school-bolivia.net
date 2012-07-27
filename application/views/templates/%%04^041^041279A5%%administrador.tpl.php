@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-26 08:07:27
+<?php /* Smarty version 2.6.26, created on 2012-07-26 11:02:48
          compiled from headers/administrador.tpl */ ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,6 +14,7 @@
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'/>
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
         <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
+         
         
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "scripts.tpl", 'smarty_include_vars' => array()));
@@ -27,8 +28,9 @@ unset($_smarty_tpl_vars);
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
-        <script type="text/javascript" src="/js/jquery.uploadify-3.1.min.js" ></script>
-        <script>
+<script type="text/javascript" src="/js/jquery.colorbox.js"></script>
+        
+<script>
             <?php echo '
                 
                 

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-26 08:13:19
+<?php /* Smarty version 2.6.26, created on 2012-07-26 23:06:22
          compiled from administrador/inscribirAlumno.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/administrador.tpl", 'smarty_include_vars' => array()));
@@ -7,17 +7,42 @@ unset($_smarty_tpl_vars);
  ?>
 <script>
     <?php echo '
-    $(document).ready(function() {
-  $(\'#upload_file\').uploadify({
-    \'swf\'  : \'/js/uploadify.swf\',
-    \'uploader\'    : \'/alumno/subirlista\',
-    \'buttonText\' : \'Select image\',
-    \'auto\'      : true,
-   onComplete   : function(event, id, fileObj, resp, data){
-                    alert(resp);
-                 }
-    });
-});
+        $(document).ready(function(){
+            var modal;
+            $("div.msn").hide();
+            $("#send").submit(function(e){
+                e.preventDefault();
+                $("div.msn").show();
+                 $("#acepted").click(function(e){
+                   e.preventDefault();
+
+                   $(".msn div").append("<div style=\'color:#ff0000\'>Guardando los datos espere porfavor...</div>");
+                   console.debug($("#curso_2").val());
+                   //alert($("#curso_corresponde").val());
+
+                   $.post("/alumno/guardarlista",{"id":$("#curso_corresponde").val()},function(data){
+                            modal.colorbox.close();
+                            if(data.success==true)
+                            {
+                                alert("Datos Guardados COrrectamente");
+                            }else
+                            {
+                                alert("Error no Existe la session");
+                            }
+                   },"json");
+                });
+                $("#cancel").click(function(e){
+                   e.preventDefault();
+                   modal.colorbox.close();
+                });
+                if($("#curso_corresponde").val()=="")
+                {
+                    $(".msn div").append($("#curso_corresponde").val());
+                    modal=$("#est").colorbox({href:".msn",inline:true, width:"500",open:true,onClosed:function(){}});
+                }
+                return false;
+            });
+        });
     '; ?>
 
 </script>
@@ -107,8 +132,64 @@ $this->_sections['numero']['last']       = ($this->_sections['numero']['iteratio
                 <input id="upload_file" type="file" name="upload_file" value="Subir Lista en CVS"/>
                 <input type="submit" value="Enviar"/>
             </td>
-            <td>
-        <select name="curso_corresponde" id="curso_corresponde">
+            
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo $this->_tpl_vars['msn']; ?>
+
+                
+            </td>
+        </tr>
+    </table>
+</form>
+    <table>
+        <?php unset($this->_sections['num']);
+$this->_sections['num']['loop'] = is_array($_loop=$this->_tpl_vars['csv']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$this->_sections['num']['name'] = 'num';
+$this->_sections['num']['show'] = true;
+$this->_sections['num']['max'] = $this->_sections['num']['loop'];
+$this->_sections['num']['step'] = 1;
+$this->_sections['num']['start'] = $this->_sections['num']['step'] > 0 ? 0 : $this->_sections['num']['loop']-1;
+if ($this->_sections['num']['show']) {
+    $this->_sections['num']['total'] = $this->_sections['num']['loop'];
+    if ($this->_sections['num']['total'] == 0)
+        $this->_sections['num']['show'] = false;
+} else
+    $this->_sections['num']['total'] = 0;
+if ($this->_sections['num']['show']):
+
+            for ($this->_sections['num']['index'] = $this->_sections['num']['start'], $this->_sections['num']['iteration'] = 1;
+                 $this->_sections['num']['iteration'] <= $this->_sections['num']['total'];
+                 $this->_sections['num']['index'] += $this->_sections['num']['step'], $this->_sections['num']['iteration']++):
+$this->_sections['num']['rownum'] = $this->_sections['num']['iteration'];
+$this->_sections['num']['index_prev'] = $this->_sections['num']['index'] - $this->_sections['num']['step'];
+$this->_sections['num']['index_next'] = $this->_sections['num']['index'] + $this->_sections['num']['step'];
+$this->_sections['num']['first']      = ($this->_sections['num']['iteration'] == 1);
+$this->_sections['num']['last']       = ($this->_sections['num']['iteration'] == $this->_sections['num']['total']);
+?>
+            <tr>
+                <td><?php echo $this->_tpl_vars['csv'][$this->_sections['num']['index']]['id']; ?>
+</td>
+                <td><?php echo $this->_tpl_vars['csv'][$this->_sections['num']['index']]['ci']; ?>
+</td>
+                <td><?php echo $this->_tpl_vars['csv'][$this->_sections['num']['index']]['APELLIDOS_Y_NOMBRES']; ?>
+</td>
+            </tr>
+        <?php endfor; endif; ?>
+    </table>
+    <?php if ($this->_tpl_vars['save'] == true): ?>
+    <form action="" id="send" method="post">
+    <fielset>
+        <legend>
+            Insertar a la Base de datos
+        </legend>
+        <ul>
+            <li>
+                <input id="enviar" type="submit" value="Guardar Lista en la Base de datos"/>
+            </li>
+            <li>
+                <select name="curso_corresponde" id="curso_2">
     		<option value="">Seleccione un curso</option>
           <?php unset($this->_sections['numero']);
 $this->_sections['numero']['loop'] = is_array($_loop=$this->_tpl_vars['cursos']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
@@ -134,23 +215,43 @@ $this->_sections['numero']['index_next'] = $this->_sections['numero']['index'] +
 $this->_sections['numero']['first']      = ($this->_sections['numero']['iteration'] == 1);
 $this->_sections['numero']['last']       = ($this->_sections['numero']['iteration'] == $this->_sections['numero']['total']);
 ?>
-	          <option value="<?php echo $this->_tpl_vars['id'][$this->_sections['numero']['index']]; ?>
+	          <option  value="<?php echo $this->_tpl_vars['id'][$this->_sections['numero']['index']]; ?>
 " <?php if ($this->_tpl_vars['cursos'][$this->_sections['numero']['index']] == $_POST['curso_corresponde']): ?> selected="selected" <?php endif; ?> <?php if ($this->_tpl_vars['cursos'][$this->_sections['numero']['index']] == $this->_tpl_vars['cursillo']): ?> selected="selected"<?php endif; ?>><?php echo $this->_tpl_vars['cursos'][$this->_sections['numero']['index']]; ?>
 </option>
 		  <?php endfor; endif; ?>
         </select><?php echo $this->_tpl_vars['errorCurso']; ?>
 
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <?php echo $this->_tpl_vars['msn']; ?>
+            </li>
+        </ul>
+    </fieldset>
+    </form>
+    <?php endif; ?>
 
-            </td>
-        </tr>
-    </table>
-</form>
 </fieldset>
+<div id="est">
+    
+</div>
+<div class="msn">
+    Se Guardara el contenio en la base de datos, en el curo: <div></div>
+    <ul class="iconmenu">
+        <li>
+            <a href="" id="acepted">
+            <img src="/css/icons/add.png"/>
+            <span>
+                Aceptar
+            </span>
+            </a>
+        </li>
+        <li>
+            <a href="" id="cancel">
+                <img src="/css/icons/return.png"/>
+                <span>
+                    Cancelar
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
 </div>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "footers/administrador.tpl", 'smarty_include_vars' => array()));

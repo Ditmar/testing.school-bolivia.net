@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-05-28 02:02:37
+<?php /* Smarty version 2.6.26, created on 2012-07-26 08:32:08
          compiled from administrador/subirImagen.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/administrador.tpl", 'smarty_include_vars' => array()));

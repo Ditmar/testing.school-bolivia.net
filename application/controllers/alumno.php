@@ -19,8 +19,29 @@ class Alumno extends CI_Controller {
         if (isset($_POST['PHPSESSID'])) {
             $_COOKIE['PHPSESSID'] = $_POST['PHPSESSID'];
         }
-        if ($m == true)
+        if ($m == 1) {
             $salida['msn'] = "La lista se importo con éxito";
+            $salida['save'] = true;
+        }
+        if ($m == 2)
+            $salida['msn'] = "EL formato del archivo es incorrecto solo se admiten archivos csv";
+        /*
+         * Controlamos si se ha subido un CSV
+         */
+        if ($this->session->userdata("csvfilename") != null) {
+            $this->load->library("csvreader");
+            $files = $this->csvreader->parse_file($this->session->userdata("csvfilename"));
+            $FF = ARRAY();
+            foreach ($files as $f) {
+                $data = ARRAY(
+                    "APELLIDOS_Y_NOMBRES" => utf8_encode($f["APELLIDOS_Y_NOMBRES"]),
+                    "id" => $f["id"],
+                    "ci" => $f["ci"]
+                );
+                $FF[] = $data;
+            }
+            $salida["csv"] = $FF;
+        }
         if (!esAdministrador())
             redirect("administrador/iniciarSesion");
         $salida['divError'] = "style='display:none;'";
@@ -40,14 +61,60 @@ class Alumno extends CI_Controller {
         }
     }
 
+    function guardarlista() {
+        $idcurso = $this->input->post("id");
+        if ($this->session->userdata("csvfilename") != null) {
+            $this->load->library("csvreader");
+            $files = $this->csvreader->parse_file($this->session->userdata("csvfilename"));
+            $FF = ARRAY();
+            foreach ($files as $f) {
+                /*$data = ARRAY(
+                    "APELLIDOS_Y_NOMBRES" => utf8_encode($f["APELLIDOS_Y_NOMBRES"]),
+                    "id" => $f["id"],
+                    "ci" => $f["ci"]
+                );*/
+                $nombres=explode(",",utf8_encode($f["APELLIDOS_Y_NOMBRES"]));
+
+                $idCole = $this->session->userdata('idCole');
+                $id_cur = $idcurso;
+                $nom_usuario = $this->usuariomodel->creaNombreUsuario(trim($nombres[0]),trim($nombres[1]));
+                $password = $nom_usuario . '123';
+                $data = array(
+                    'nombre' => trim($nombres[0]),
+                    'apellido' => trim($nombres[1]),
+                    'curso_id' => $id_cur,
+                    'usuario' => $nom_usuario,
+                    'password' => $password,
+                    'colegio_id' => $idCole,
+                    'estadoImagen' => ""
+                );
+                $alumno = $this->alumnomodel->crear($data);
+                $this->inscripcionmodel->inscribir($alumno->id(), $id_cur);
+            }
+            $this->session->set_userdata("csvfilename",null);
+            echo json_encode(array("success"=>true));
+            return ;
+        }
+        echo json_encode(array("success"=>false));
+        return;
+    }
+
     function subirlista() {
         $nombre = $_FILES["upload_file"]["name"];
         $tmpnombre = $_FILES["upload_file"]["tmp_name"];
         $prefijo = substr(md5(uniqid(rand())), 0, 6);
         $namefile = $_SERVER["DOCUMENT_ROOT"] . "/cvsfolder/" . $prefijo . $nombre;
-        move_uploaded_file($_FILES["upload_file"]["tmp_name"], $namefile);
-        echo json_encode(array("success" => true));
-        //redirect("alumno/inscribirAlumno/true");
+        $data = explode(".", $nombre);
+
+        if ($data[count($data) - 1] == "csv") {
+            $this->session->set_userdata("csvfilename", $namefile);
+
+            move_uploaded_file($_FILES["upload_file"]["tmp_name"], $namefile);
+            //echo json_encode(array("success" => true));
+            redirect("alumno/inscribirAlumno/1");
+            return;
+        }
+        redirect("alumno/inscribirAlumno/2");
     }
 
     function modificar() {

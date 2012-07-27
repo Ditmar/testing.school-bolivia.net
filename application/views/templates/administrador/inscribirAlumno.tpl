@@ -1,18 +1,43 @@
 {include file="headers/administrador.tpl"}
 <script>
     {literal}
-    $(document).ready(function() {
-  $('#upload_file').uploadify({
-    'swf'  : '/js/uploadify.swf',
-    'uploader'    : '/alumno/subirlista',
-    'buttonText' : 'Select image',
-    'auto'      : true,
-    'scriptData': { 'ASPSESSID': ASPSESSID, 'AUTHID': auth  },
-   onComplete   : function(event, id, fileObj, resp, data){
-                    alert(resp);
-                 }
-    });
-});
+        $(document).ready(function(){
+            var modal;
+            $("div.msn").hide();
+            $("#send").submit(function(e){
+                e.preventDefault();
+                $("div.msn").show();
+                 $("#acepted").click(function(e){
+                   e.preventDefault();
+
+                   $(".msn div").append("<div style='color:#ff0000'>Guardando los datos espere porfavor...</div>");
+                   console.debug($("#curso_2").val());
+                   //alert($("#curso_corresponde").val());
+
+                   $.post("/alumno/guardarlista",{"id":$("#curso_corresponde").val()},function(data){
+                            modal.colorbox.close();
+                            if(data.success==true)
+                            {
+                                alert("Datos Guardados COrrectamente");
+                            }else
+                            {
+                                alert("Error no Existe la session");
+                            }
+                   },"json");
+                });
+                $("#cancel").click(function(e){
+                   e.preventDefault();
+                   modal.colorbox.close();
+                   $("div.msn").hide();   
+                });
+                if($("#curso_corresponde").val()=="")
+                {
+                    $(".msn div").append($("#curso_corresponde").val());
+                    modal=$("#est").colorbox({href:".msn",inline:true, width:"500",open:true,onClosed:function(){}});
+                }
+                return false;
+            });
+        });
     {/literal}
 </script>
 <div class="span-12 append-3 prepend-3 last">
@@ -69,22 +94,72 @@
                 <input id="upload_file" type="file" name="upload_file" value="Subir Lista en CVS"/>
                 <input type="submit" value="Enviar"/>
             </td>
-            <td>
-        <select name="curso_corresponde" id="curso_corresponde">
-    		<option value="">Seleccione un curso</option>
-          {section loop=$cursos name=numero}
-	          <option value="{$id[numero]}" {if $cursos[numero]==$smarty.post.curso_corresponde} selected="selected" {/if} {if $cursos[numero]==$cursillo} selected="selected"{/if}>{$cursos[numero]}</option>
-		  {/section}
-        </select>{$errorCurso}
-            </td>
+            
         </tr>
         <tr>
             <td colspan="2">
                 {$msn}
+                
             </td>
         </tr>
     </table>
 </form>
+    <table>
+        {section loop=$csv name=num}
+            <tr>
+                <td>{$csv[num].id}</td>
+                <td>{$csv[num].ci}</td>
+                <td>{$csv[num].APELLIDOS_Y_NOMBRES}</td>
+            </tr>
+        {/section}
+    </table>
+    {if $save==true}
+    <form action="" id="send" method="post">
+    <fielset>
+        <legend>
+            Insertar a la Base de datos
+        </legend>
+        <ul>
+            <li>
+                <input id="enviar" type="submit" value="Guardar Lista en la Base de datos"/>
+            </li>
+            <li>
+                <select name="curso_corresponde" id="curso_2">
+    		<option value="">Seleccione un curso</option>
+          {section loop=$cursos name=numero}
+	          <option  value="{$id[numero]}" {if $cursos[numero]==$smarty.post.curso_corresponde} selected="selected" {/if} {if $cursos[numero]==$cursillo} selected="selected"{/if}>{$cursos[numero]}</option>
+		  {/section}
+        </select>{$errorCurso}
+            </li>
+        </ul>
+    </fieldset>
+    </form>
+    {/if}
+
 </fieldset>
+<div id="est">
+    
+</div>
+<div class="msn">
+    Se Guardara el contenio en la base de datos, en el curo: <div></div>
+    <ul class="iconmenu">
+        <li>
+            <a href="" id="acepted">
+            <img src="/css/icons/add.png"/>
+            <span>
+                Aceptar
+            </span>
+            </a>
+        </li>
+        <li>
+            <a href="" id="cancel">
+                <img src="/css/icons/return.png"/>
+                <span>
+                    Cancelar
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
 </div>
 {include file="footers/administrador.tpl"}

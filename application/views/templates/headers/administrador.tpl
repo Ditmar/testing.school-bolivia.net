@@ -12,6 +12,7 @@
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'/>
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'/>
         <link href='/css/ui-lightness/jquery-ui-1.8.21.custom.css' rel='stylesheet' type='text/css'/>
+         
         
 {include file="scripts.tpl"}
   
@@ -21,8 +22,9 @@
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
-        <script type="text/javascript" src="/js/jquery.uploadify-3.1.min.js" ></script>
-        <script>
+<script type="text/javascript" src="/js/jquery.colorbox.js"></script>
+        
+<script>
             {literal}
                 
                 
