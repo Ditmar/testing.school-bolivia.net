@@ -6,10 +6,7 @@ class Inscripcionmodel extends CI_Model
 		parent::__construct();
 	}
 
-	function Inscripcionmodel()
-	{
-		parent::CI_Model();
-	}
+	
 
 	function inscribir($alumno_id, $curso_id)
 	{
