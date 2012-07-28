@@ -1,1 +1,2 @@
-<?php $data = new Spreadsheet_Excel_Reader();
+<?php $cad=utf8_decode("ÑoÑo");
+echo substr($cad,0,1);

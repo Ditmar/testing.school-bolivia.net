@@ -70,6 +70,7 @@ class Alumno extends CI_Controller {
                     "id" => $f["id"],
                     "ci" => $f["ci"]
                 );*/
+                
                 $nombres=explode(",",utf8_encode($f["APELLIDOS_Y_NOMBRES"]));
 
                 $idCole = $this->session->userdata('idCole');
@@ -80,13 +81,14 @@ class Alumno extends CI_Controller {
                     'nombre' => trim($nombres[0]),
                     'apellido' => trim($nombres[1]),
                     'curso_id' => $id_cur,
-                    'usuario' => $nom_usuario,
-                    'password' => $password,
+                    'usuario' => utf8_encode($nom_usuario),
+                    'password' => utf8_encode($password),
                     'colegio_id' => $idCole,
                     'estadoImagen' => ""
                 );
                 $alumno = $this->alumnomodel->crear($data);
-                $this->inscripcionmodel->inscribir($alumno->id(), $id_cur);
+                $idtest=$alumno->id();
+                $this->inscripcionmodel->inscribir($idtest, $id_cur);
             }
             $this->session->unset_userdata("csvfilename");
             echo json_encode(array("success"=>true));
@@ -158,8 +160,8 @@ class Alumno extends CI_Controller {
             'nombre' => $this->input->post('nombre_alum'),
             'apellido' => $this->input->post('apell_alumn'),
             'curso_id' => $id_cur,
-            'usuario' => $nom_usuario,
-            'password' => $password,
+            'usuario' => utf8_encode($nom_usuario),
+            'password' => utf8_encode($password),
             'colegio_id' => $idCole,
             'estadoImagen' => $idCole
         );

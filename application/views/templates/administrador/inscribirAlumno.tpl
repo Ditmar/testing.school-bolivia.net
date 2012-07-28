@@ -14,7 +14,7 @@
                    console.debug($("#curso_2").val());
                    //alert($("#curso_corresponde").val());
 
-                   $.post("/alumno/guardarlista",{"id":$("#curso_corresponde").val()},function(data){
+                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val()},function(data){
                             modal.colorbox.close();
                             if(data.success==true)
                             {

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-27 04:36:28
+<?php /* Smarty version 2.6.26, created on 2012-07-27 23:44:06
          compiled from administrador/inscribirAlumno.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/administrador.tpl", 'smarty_include_vars' => array()));
@@ -20,7 +20,7 @@ unset($_smarty_tpl_vars);
                    console.debug($("#curso_2").val());
                    //alert($("#curso_corresponde").val());
 
-                   $.post("/alumno/guardarlista",{"id":$("#curso_corresponde").val()},function(data){
+                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val()},function(data){
                             modal.colorbox.close();
                             if(data.success==true)
                             {

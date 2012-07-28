@@ -1,21 +1,20 @@
 <?php
 class Alumnomodel extends CI_Model
 {
+        var $alumno_id;
 		function __construct()
 		{
     		parent::__construct();
   		}
 
-		function Alumnomodel()
-		{
-			parent::CI_Model();
-		}
+		
 
 		function crear($data)
 		{
 				$this->db->insert('alumno', $data);
 				$query = $this->db->get_where('alumno', $data);
-				return current($query->result('Alumnomodel'));
+				$this->alumno_id=$this->db->insert_id();
+                return current($query->result('Alumnomodel'));
 		}
 
 		function existe($data)
@@ -37,6 +36,7 @@ class Alumnomodel extends CI_Model
 
 		function id()
 		{
+		      
 			return $this->alumno_id;
 		}
 
