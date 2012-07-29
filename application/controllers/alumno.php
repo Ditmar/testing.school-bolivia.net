@@ -77,8 +77,8 @@ class Alumno extends CI_Controller {
         if($this->filesmodel->checkhash($idmd5))
         {
         	$arr=$this->filesmodel->getInfo($idmd5);
-        	echo json_encode(array("success"=>false,"msn"=>"La lista de estudiantes es exactamente igual a una lista que fue subida anteriormente esta informacion es propia de ".$arr[0]["nombre_colegio"]));
         	$this->session->unset_userdata("csvfilename");
+        	echo json_encode(array("success"=>false,"msn"=>"La lista de estudiantes es exactamente igual a una lista que fue subida anteriormente esta informacion es propia de ".$arr[0]["nombre_colegio"]));
         	return;
         }
         if ($this->session->userdata("csvfilename") != null) {
