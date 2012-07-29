@@ -4,24 +4,23 @@
         $(document).ready(function(){
             var modal;
             $("div.msn").hide();
-            $("#send").submit(function(e){
-                e.preventDefault();
-                $("div.msn").show();
-                 $("#acepted").click(function(e){
+            $("#acepted").click(function(e){
+                   $("#acepted").hide();
+                   $("#cancel").hide();
                    e.preventDefault();
-
-                   $(".msn div").append("<div style='color:#ff0000'>Guardando los datos espere porfavor...</div>");
-                   console.debug($("#curso_2").val());
-                   //alert($("#curso_corresponde").val());
-
-                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val()},function(data){
+                   $(".msn div").html("<div style='color:#ff0000'>Guardando los datos espere porfavor...</div>");
+                   
+                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val(),"hashtag":$("#hashtag").val()},function(data){
                             modal.colorbox.close();
+                            
                             if(data.success==true)
                             {
-                                alert("Datos Guardados COrrectamente");
+                                alert("Datos Guardados Correctamente");
+                                document.location.href="";
                             }else
                             {
-                                alert("Error no Existe la session");
+                                alert(data.msn);
+                                $("div.msn").hide();
                             }
                    },"json");
                 });
@@ -30,6 +29,12 @@
                    modal.colorbox.close();
                    $("div.msn").hide();   
                 });
+            $("#send").submit(function(e){
+            	$("#acepted").show();
+                $("#cancel").show();
+                e.preventDefault();
+                $("div.msn").show();
+                 
                 if($("#curso_corresponde").val()=="")
                 {
                     $(".msn div").append($("#curso_corresponde").val());
@@ -104,6 +109,7 @@
         </tr>
     </table>
 </form>
+	{if $md5!=""}<div>CheckSum: {$md5}</div><input type="hidden" id="hashtag" value="{$md5}"/>{/if}
     <table>
         {section loop=$csv name=num}
             <tr>
@@ -113,7 +119,7 @@
             </tr>
         {/section}
     </table>
-    {if $save==true}
+    {if $md5!=""}
     <form action="" id="send" method="post">
     <fielset>
         <legend>
@@ -124,7 +130,7 @@
                 <input id="enviar" type="submit" value="Guardar Lista en la Base de datos"/>
             </li>
             <li>
-                <select name="curso_corresponde" id="curso_2">
+                <select name="curso_2" id="curso_2">
     		<option value="">Seleccione un curso</option>
           {section loop=$cursos name=numero}
 	          <option  value="{$id[numero]}" {if $cursos[numero]==$smarty.post.curso_corresponde} selected="selected" {/if} {if $cursos[numero]==$cursillo} selected="selected"{/if}>{$cursos[numero]}</option>
@@ -140,6 +146,7 @@
 <div id="est">
     
 </div>
+
 <div class="msn">
     Se Guardara el contenio en la base de datos, en el curo: <div></div>
     <ul class="iconmenu">

@@ -177,7 +177,6 @@
 			$salida['prom_area'][$k] = "<strong><em>".$notaArea['nota']."</em></strong>";
 
 		}
-
 		$arrayNotas = array();
 		$k = 0;
 		$suma_i = $salida['cantCriterios'][$k];
@@ -222,6 +221,7 @@
                 echo json_encode(array("status"=>"No tienes Permiso para ver esta informaci�n"));        
                 return;    
             }
+           	
             $this->session->set_userdata("idEs",$this->input->post("id"));
             $this->session->set_userdata("idNombre",$this->input->post("nombre"));
             echo json_encode(array("idEs"=>$this->session->userdata("idEs")));
@@ -236,6 +236,7 @@
         function getpadres()
         {
             $this->load->model("padremodel");
+            
             $r=$this->padremodel->getpadres($this->session->userdata("idCole"));
             
             $l=array();

@@ -6,7 +6,7 @@ class Alumno extends CI_Controller {
         autorizar_ingreso();
         $this->Auth->allowedActions = array('admin_attach');
     }
-
+    
     function bienvenido() {
         if (!esAlumno())
             redirect("administrador/iniciarSesion");
@@ -25,24 +25,30 @@ class Alumno extends CI_Controller {
         /*
          * Controlamos si se ha subido un CSV
          */
+        
         if ($this->session->userdata("csvfilename") != null) {
             $this->load->library("csvreader");
             $files = $this->csvreader->parse_file($this->session->userdata("csvfilename"));
             $FF = ARRAY();
+            $checksum="";
             foreach ($files as $f) {
                 $data = ARRAY(
                     "APELLIDOS_Y_NOMBRES" => utf8_encode($f["APELLIDOS_Y_NOMBRES"]),
                     "id" => $f["id"],
                     "ci" => $f["ci"]
                 );
+                $checksum.=utf8_encode($f["APELLIDOS_Y_NOMBRES"]).$f["id"].$f["ci"];
                 $FF[] = $data;
             }
+            
+            $salida["md5"]=md5($checksum);
             $salida["csv"] = $FF;
         }
         if (!esAdministrador())
             redirect("administrador/iniciarSesion");
         $salida['divError'] = "style='display:none;'";
         $salida = $this->llenaComboCursos($salida);
+        
         $this->validarDatos();
         if ($this->form_validation->run() == false) {
             $salida = $this->muestraDatos($salida);
@@ -60,6 +66,21 @@ class Alumno extends CI_Controller {
 
     function guardarlista() {
         $idcurso = $this->input->post("id");
+        $idmd5=$this->input->post("hashtag");
+        $this->form_validation->set_rules("id","id","integer|required");
+        if($this->form_validation->run()==false)
+        {
+        	
+        	echo json_encode(array("success"=>false,"msn"=>$this->form_validation->error_string("Seleccionar Curso")));
+        	return;
+        }
+        if($this->filesmodel->checkhash($idmd5))
+        {
+        	$arr=$this->filesmodel->getInfo($idmd5);
+        	echo json_encode(array("success"=>false,"msn"=>"La lista de estudiantes es exactamente igual a una lista que fue subida anteriormente esta informacion es propia de ".$arr[0]["nombre_colegio"]));
+        	$this->session->unset_userdata("csvfilename");
+        	return;
+        }
         if ($this->session->userdata("csvfilename") != null) {
             $this->load->library("csvreader");
             $files = $this->csvreader->parse_file($this->session->userdata("csvfilename"));
@@ -90,11 +111,23 @@ class Alumno extends CI_Controller {
                 $idtest=$alumno->id();
                 $this->inscripcionmodel->inscribir($idtest, $id_cur);
             }
+            
+            //insertamo el hash
+            $file=array(
+            		"fecha"=>date("m-d-y"),
+            		"url"=>$this->session->userdata("csvfilename"),
+            		"hashtag"=>$idmd5,
+            		"idAd"=>$this->session->userdata("usuario_id"),
+            		"idCol"=>$this->session->userdata("idCole")
+            		);
+            $this->filesmodel->insert($file);
+            
             $this->session->unset_userdata("csvfilename");
             echo json_encode(array("success"=>true));
+           
             return ;
         }
-        echo json_encode(array("success"=>false));
+        echo json_encode(array("success"=>false,"msn"=>"no se ha detectado un CSV en la memoria"));
         return;
     }
 
@@ -175,11 +208,11 @@ class Alumno extends CI_Controller {
         //foreach ($cursos as $curso) {
         foreach ($cursos as $key => $curso) {
             $salida['cursos'][$key] = $curso->nombre();
+
             $salida['id'][$key] = $curso->id();
         }
         return $salida;
     }
-
     function validarSiExisteAlumno() {
         $nombre = $this->input->post('nombre_alum');
         $apellido = $this->input->post('apell_alumn');

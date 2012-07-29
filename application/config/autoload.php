@@ -127,7 +127,8 @@ $autoload['model'] = array(
 	'superadminmodel',
 	'imagenmodel',
 	'libretamodel',
-	'usuariomodel'
+	'usuariomodel',
+    'filesmodel'
 );
 
 

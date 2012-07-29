@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-27 23:44:06
+<?php /* Smarty version 2.6.26, created on 2012-07-29 09:59:24
          compiled from administrador/inscribirAlumno.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/administrador.tpl", 'smarty_include_vars' => array()));
@@ -10,24 +10,23 @@ unset($_smarty_tpl_vars);
         $(document).ready(function(){
             var modal;
             $("div.msn").hide();
-            $("#send").submit(function(e){
-                e.preventDefault();
-                $("div.msn").show();
-                 $("#acepted").click(function(e){
+            $("#acepted").click(function(e){
+                   $("#acepted").hide();
+                   $("#cancel").hide();
                    e.preventDefault();
-
-                   $(".msn div").append("<div style=\'color:#ff0000\'>Guardando los datos espere porfavor...</div>");
-                   console.debug($("#curso_2").val());
-                   //alert($("#curso_corresponde").val());
-
-                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val()},function(data){
+                   $(".msn div").html("<div style=\'color:#ff0000\'>Guardando los datos espere porfavor...</div>");
+                   
+                   $.post("/alumno/guardarlista",{"id":$("#curso_2").val(),"hashtag":$("#hashtag").val()},function(data){
                             modal.colorbox.close();
+                            
                             if(data.success==true)
                             {
-                                alert("Datos Guardados COrrectamente");
+                                alert("Datos Guardados Correctamente");
+                                document.location.href="";
                             }else
                             {
-                                alert("Error no Existe la session");
+                                alert(data.msn);
+                                $("div.msn").hide();
                             }
                    },"json");
                 });
@@ -36,6 +35,12 @@ unset($_smarty_tpl_vars);
                    modal.colorbox.close();
                    $("div.msn").hide();   
                 });
+            $("#send").submit(function(e){
+            	$("#acepted").show();
+                $("#cancel").show();
+                e.preventDefault();
+                $("div.msn").show();
+                 
                 if($("#curso_corresponde").val()=="")
                 {
                     $(".msn div").append($("#curso_corresponde").val());
@@ -144,6 +149,9 @@ $this->_sections['numero']['last']       = ($this->_sections['numero']['iteratio
         </tr>
     </table>
 </form>
+	<?php if ($this->_tpl_vars['md5'] != ""): ?><div>CheckSum: <?php echo $this->_tpl_vars['md5']; ?>
+</div><input type="hidden" id="hashtag" value="<?php echo $this->_tpl_vars['md5']; ?>
+"/><?php endif; ?>
     <table>
         <?php unset($this->_sections['num']);
 $this->_sections['num']['loop'] = is_array($_loop=$this->_tpl_vars['csv']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
@@ -179,7 +187,7 @@ $this->_sections['num']['last']       = ($this->_sections['num']['iteration'] ==
             </tr>
         <?php endfor; endif; ?>
     </table>
-    <?php if ($this->_tpl_vars['save'] == true): ?>
+    <?php if ($this->_tpl_vars['md5'] != ""): ?>
     <form action="" id="send" method="post">
     <fielset>
         <legend>
@@ -190,7 +198,7 @@ $this->_sections['num']['last']       = ($this->_sections['num']['iteration'] ==
                 <input id="enviar" type="submit" value="Guardar Lista en la Base de datos"/>
             </li>
             <li>
-                <select name="curso_corresponde" id="curso_2">
+                <select name="curso_2" id="curso_2">
     		<option value="">Seleccione un curso</option>
           <?php unset($this->_sections['numero']);
 $this->_sections['numero']['loop'] = is_array($_loop=$this->_tpl_vars['cursos']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
@@ -232,6 +240,7 @@ $this->_sections['numero']['last']       = ($this->_sections['numero']['iteratio
 <div id="est">
     
 </div>
+
 <div class="msn">
     Se Guardara el contenio en la base de datos, en el curo: <div></div>
     <ul class="iconmenu">
@@ -258,4 +267,4 @@ $this->_sections['numero']['last']       = ($this->_sections['numero']['iteratio
 $this->_smarty_include(array('smarty_include_tpl_file' => "footers/administrador.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
- ?>
+ ?>
