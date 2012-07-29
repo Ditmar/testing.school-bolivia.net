@@ -17,7 +17,7 @@ class Alumno extends CI_Controller {
     function inscribirAlumno($m=null) {
         
         if ($m == 1) {
-            $salida['msn'] = "La lista se importo con Ã©xito";
+            $salida['msn'] = "La lista se importo con éxito";
             $salida['save'] = true;
         }
         if ($m == 2)
@@ -59,7 +59,7 @@ class Alumno extends CI_Controller {
                 $this->smarty->view('administrador/inscribirAlumno.tpl', $salida);
             } else {
                 $this->almacenaAlumno();
-                redirect('administrador/bienvenido?mensaje=El+alumno+se+inscribiÃ³+satisfactoriamente');
+                redirect('administrador/bienvenido?mensaje=El+alumno+se+inscribió+satisfactoriamente');
             }
         }
     }
@@ -429,4 +429,3 @@ class Alumno extends CI_Controller {
     }
 
 }
-?>
