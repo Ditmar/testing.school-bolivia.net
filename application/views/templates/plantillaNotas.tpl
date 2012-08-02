@@ -5,7 +5,7 @@
 <!--<div class="success" id="info"{$estiloInfo}>{$mensaje}</div>-->
 <ul class="iconmenu">
 	<li>
-		<a href="/Profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
+		<a href="/profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
 	</li>
     <li>
         <a href="/area/imprimePlantilla/{$asignar_id}/{$trimestre}"><img src="/css/icons/grid.png"/><span>Planilla de Notas</span></a>
