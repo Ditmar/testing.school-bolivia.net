@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-24 06:57:52
+<?php /* Smarty version 2.6.26, created on 2012-08-02 05:06:03
          compiled from ingresarNotas.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/profesor.tpl", 'smarty_include_vars' => array()));
@@ -7,13 +7,47 @@ unset($_smarty_tpl_vars);
  ?>
 <div class="span-20">
 <div id="contentNotas">
-    <div class="iconmenu">
-        <li>
-            <a href="#" id="btnmostrar">
-                <img src="/css/icons/eye.png"/><span>Ver Todo</span>
-            </a>
-        </li>
-    </div>
+    <ul class="iconmenu">
+	<li>
+		<a href="/Profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
+	</li>
+    <li>
+        <a href="/area/imprimePlantilla/<?php echo $this->_tpl_vars['asignar_id']; ?>
+/<?php echo $this->_tpl_vars['trimestre']; ?>
+"><img src="/css/icons/grid.png"/><span>Planilla de Notas</span></a>
+    </li>
+    <li>
+        <a href="/area/crearArea/<?php echo $this->_tpl_vars['asignar_id']; ?>
+/<?php echo $this->_tpl_vars['trimestre']; ?>
+"><img src="/css/icons/area.png"/><span>Crear area</span></a>
+    </li>
+    <li>
+        <a href="/area/ingresarNotas/<?php echo $this->_tpl_vars['asignar_id']; ?>
+/<?php echo $this->_tpl_vars['trimestre']; ?>
+"><img src="/css/icons/add.png"/><span>Insertar Notas</span></a>
+    </li>
+    <li>
+        <a  href="/calendario/insertarTarea/<?php echo $this->_tpl_vars['asignar_id']; ?>
+"><img src="/css/icons/calendar.png"/><span>Calendario</span> </a>
+    </li>
+    <li>
+        <a href="/documentos/verDocumentos/<?php echo $this->_tpl_vars['asignar_id']; ?>
+"><img src="/css/icons/download.png"/><span>Descargar Documentos</span> </a>
+    </li>
+    <li>
+       <a  href="/documentos/subirArchivo/<?php echo $this->_tpl_vars['asignar_id']; ?>
+"><img src="/css/icons/upload.png"/><span>Subir documentos</span> </a> 
+    </li>
+    <li>
+        <!-- Enlace a Jquery-->
+        <a href="#" id="btnmostrar">
+            <img src="/css/icons/eye.png"/><span>Ver Todo</span>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo site_url("profesor/bienvenido"); ?>"> <img src="/css/icons/return.png"/> <span>volver</span></a>
+    </li>
+</ul>
     <form id="ingresarNotas" name="ingresarNotas" method="post"
 		action="/registroNotas/registrar/<?php echo $this->_tpl_vars['id_materia']; ?>
 /<?php echo $this->_tpl_vars['trimestre']; ?>
@@ -29,9 +63,9 @@ unset($_smarty_tpl_vars);
 </p>
 			</div>
 			<div id="contentScroller" class="span-18 last">
-			<table class="tablare gistroNotas" id="registrarnotas">
+			<table  id="registrarnotas">
 				<tr>
-					<th rowspan="2">Nombre de Estudiante</th>
+					<th rowspan="2"><div class="nombrelabel">Nombre de Estudiante</div></th>
 					<?php unset($this->_sections['numeroDiv']);
 $this->_sections['numeroDiv']['loop'] = is_array($_loop=$this->_tpl_vars['area']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
 $this->_sections['numeroDiv']['name'] = 'numeroDiv';
@@ -57,8 +91,8 @@ $this->_sections['numeroDiv']['first']      = ($this->_sections['numeroDiv']['it
 $this->_sections['numeroDiv']['last']       = ($this->_sections['numeroDiv']['iteration'] == $this->_sections['numeroDiv']['total']);
 ?>
 					<th colspan="<?php echo $this->_tpl_vars['cantCriterios'][$this->_sections['numeroDiv']['index']]; ?>
-"><?php echo $this->_tpl_vars['area'][$this->_sections['numeroDiv']['index']]; ?>
-</th>
+"><div class="criterioslabel"><?php echo $this->_tpl_vars['area'][$this->_sections['numeroDiv']['index']]; ?>
+</div></th>
 					<?php endfor; endif; ?>
 				</tr>
 				<tr>
@@ -86,10 +120,10 @@ $this->_sections['contCri']['index_next'] = $this->_sections['contCri']['index']
 $this->_sections['contCri']['first']      = ($this->_sections['contCri']['iteration'] == 1);
 $this->_sections['contCri']['last']       = ($this->_sections['contCri']['iteration'] == $this->_sections['contCri']['total']);
 ?>
-					<td><?php if ($this->_tpl_vars['notaMax'][$this->_sections['contCri']['index']]): ?> <?php echo $this->_tpl_vars['criterio'][$this->_sections['contCri']['index']]; ?>
+					<td><div class="criAlumnoinsertar"><?php if ($this->_tpl_vars['notaMax'][$this->_sections['contCri']['index']]): ?> <?php echo $this->_tpl_vars['criterio'][$this->_sections['contCri']['index']]; ?>
 
 					(<?php echo $this->_tpl_vars['notaMax'][$this->_sections['contCri']['index']]; ?>
-ptos) <?php endif; ?></td>
+ptos) <?php endif; ?></div></td>
 					<?php endfor; endif; ?>
 			
 				</tr>
@@ -118,8 +152,8 @@ $this->_sections['contAlum']['first']      = ($this->_sections['contAlum']['iter
 $this->_sections['contAlum']['last']       = ($this->_sections['contAlum']['iteration'] == $this->_sections['contAlum']['total']);
 ?>
 				<tr>
-					<td><?php echo $this->_tpl_vars['nomAlum'][$this->_sections['contAlum']['index']]; ?>
-</td>
+					<td><div class="nombreAlumnoinsertar"><?php echo $this->_tpl_vars['nomAlum'][$this->_sections['contAlum']['index']]; ?>
+</div></td>
 					<?php unset($this->_sections['contNo']);
 $this->_sections['contNo']['loop'] = is_array($_loop=$this->_tpl_vars['arrayNotasAlumnos'][$this->_sections['contAlum']['index']]) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
 $this->_sections['contNo']['name'] = 'contNo';

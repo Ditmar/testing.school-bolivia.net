@@ -18,7 +18,14 @@ class Area extends CI_Controller
 
 	function crearArea()
 	{
+		
+		
 		$salida = materiasDictaProfesor();
+		if($this->session->userdata("idA")!=null)
+		{
+			$salida['asignar_id'] = $this->session->userdata("idA");
+			$salida['trimestre'] = $this->session->userdata("idT");
+		}
 		$idProfesor = $this->session->userdata('usuario_id');
 		$salida['id_materia'] = $this->uri->segment(3);
 		$salida['trimestre'] = $this->uri->segment(4);
@@ -103,8 +110,9 @@ class Area extends CI_Controller
 			$this->notamodel->eliminarNotasCriterio($criterios[$i]['criterio_id']);
 
 		}
-		$this->areamodel->eliminarArea($area);
 		$this->criteriomodel->eliminarCriteriosArea($area);
+		$this->notamodel->eliminarPromedio($area);
+		$this->areamodel->eliminarArea($area);
 		$this->notamodel->promedioTotalAlumno($idMateria,$salida['trimestre']);
 		redirect('area/imprimePlantilla/'.$idMateria.'/'.$salida['trimestre'].'?mensaje=El+area+se+elimino+satisfactoriamente');
 	}
@@ -119,13 +127,18 @@ class Area extends CI_Controller
 	{
 		$salida = materiasDictaProfesor();
 
-		$asignar_id = $this->uri->segment(3);
-		$salida['asignar_id'] = $asignar_id;
-		$salida['trimestre'] = $this->uri->segment(4);
-		$materia_curso = $this->materiamodel->obtenerMateriaAsignada($asignar_id);
+		//$this->session->userdata("idA") = $this->uri->segment(3);
+		//$salida['asignar_id'] = $this->session->userdata("idA");
+		//$salida['trimestre'] = $this->uri->segment(4);
+		$this->session->set_userdata("idA",$this->uri->segment(3));
+		$this->session->set_userdata("idT",$this->uri->segment(4));
+		$salida['asignar_id'] = $this->session->userdata("idA");
+		$salida['trimestre'] = $this->session->userdata("idT");
+		
+		$materia_curso = $this->materiamodel->obtenerMateriaAsignada($this->session->userdata("idA"));
 		$salida['materia_curso']= $materia_curso[0]['nombre_materia'] . " - " . $materia_curso[0]['nombre_curso'];
 
-		$areasProfe = $this->areamodel->obtenerAreasProfe($asignar_id, $salida['trimestre']);
+		$areasProfe = $this->areamodel->obtenerAreasProfe($this->session->userdata("idA"), $salida['trimestre']);
 		$cant = count($areasProfe);
 		$salida['area'] = array($cant);
 		for($i=0;$i<$cant;$i++)
@@ -176,14 +189,14 @@ class Area extends CI_Controller
 			$salida['idCrit'][$i] = $IDCriterios[$i];
 		}
 
-		$vec_alum = $this->inscripcionmodel->obtenerAlumnos($asignar_id);
+		$vec_alum = $this->inscripcionmodel->obtenerAlumnos($this->session->userdata("idA"));
 
 		$cantAlum=count($vec_alum);
 		for($i=0;$i<$cantAlum;$i++)
 		{
 			$salida['nomAlum'][$i] = $vec_alum[$i]['nombre'] . " " . $vec_alum[$i]['apellido'];
 			$vecIDalum[$i] = $vec_alum[$i]['alumno_id'];
-			$notaMat = $this->notamodel->obtenerPromMateriaAlum($asignar_id,$vecIDalum[$i],$salida['trimestre']);
+			$notaMat = $this->notamodel->obtenerPromMateriaAlum($this->session->userdata("idA"),$vecIDalum[$i],$salida['trimestre']);
 			$salida['nota_Total'][$i] = $notaMat['nota'];
 			for($k=0;$k<$cant;$k++)
 			{
@@ -319,7 +332,7 @@ class Area extends CI_Controller
 		$salida['criteriosId'] = $IDCriterios;
 		$salida['divError'] ="style='display:none;'";
 		$salida['mensajeError'] ="";
-
+		$salida['asignar_id']=$this->session->userdata("idA");
 		$this->smarty->view("ingresarNotas.tpl",$salida);
 	}
 

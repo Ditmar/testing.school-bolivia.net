@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-07-24 06:54:21
+<?php /* Smarty version 2.6.26, created on 2012-08-02 04:55:00
          compiled from plantillaNotas.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/profesor.tpl", 'smarty_include_vars' => array()));
@@ -12,6 +12,14 @@ unset($_smarty_tpl_vars);
 ><?php echo $this->_tpl_vars['mensaje']; ?>
 </div>-->
 <ul class="iconmenu">
+	<li>
+		<a href="/Profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
+	</li>
+    <li>
+        <a href="/area/imprimePlantilla/<?php echo $this->_tpl_vars['asignar_id']; ?>
+/<?php echo $this->_tpl_vars['trimestre']; ?>
+"><img src="/css/icons/grid.png"/><span>Planilla de Notas</span></a>
+    </li>
     <li>
         <a href="/area/crearArea/<?php echo $this->_tpl_vars['asignar_id']; ?>
 /<?php echo $this->_tpl_vars['trimestre']; ?>
@@ -54,9 +62,9 @@ unset($_smarty_tpl_vars);
 </p>
 	</div>
 	<div id="contentScroller" class="span-18 last">
-	<table class="buscartable" class="tabla registroNotas">
+	<table class="tabla registroNotas">
 		<tr>
-			<th rowspan="2"><div class="tlabel"> Nombre Estudiante</div></th>
+			<th rowspan="2"><div class="nombrelabel"> Nombre Estudiante</div></th>
 			<?php unset($this->_sections['numeroDiv']);
 $this->_sections['numeroDiv']['loop'] = is_array($_loop=$this->_tpl_vars['area']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
 $this->_sections['numeroDiv']['name'] = 'numeroDiv';
@@ -83,7 +91,7 @@ $this->_sections['numeroDiv']['last']       = ($this->_sections['numeroDiv']['it
 ?>
 			<th colspan="<?php echo $this->_tpl_vars['cantCriterios'][$this->_sections['numeroDiv']['index']]; ?>
 " scope="col">
-            <div class="tlabel">
+            <div class="criterioslabel">
                 <?php echo $this->_tpl_vars['area'][$this->_sections['numeroDiv']['index']]; ?>
 
 				
@@ -109,11 +117,11 @@ $this->_sections['numeroDiv']['last']       = ($this->_sections['numeroDiv']['it
 			  </div>
             </div>
 			</th>
-			<th><div class="tlabel"><?php echo $this->_tpl_vars['totalArea'][$this->_sections['numeroDiv']['index']]; ?>
+			<th><div class="totallabel"><?php echo $this->_tpl_vars['totalArea'][$this->_sections['numeroDiv']['index']]; ?>
 </div></th>
 			<?php endfor; endif; ?>
 			<th rowspan="2">
-            <div class="tlabel">
+            <div class="totallabel">
                 Total
                 
             </div>

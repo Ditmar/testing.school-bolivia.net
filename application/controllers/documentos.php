@@ -69,6 +69,8 @@ class Documentos extends CI_Controller
 		$listaDocs = $this->usuariomodel->obtenerDocumentos($buscarNombre,$id_asignacion);
 		$salida['listaDocumentos'] = $listaDocs;
 		$salida['totalResultados'] = count($listaDocs);
+		$salida["asignar_id"]=$this->session->userdata("idA");
+		$salida["trimestre"]=$this->session->userdata("idT");
 		$this->smarty->view('descargarDocuProfe.tpl', $salida);
 	}
 

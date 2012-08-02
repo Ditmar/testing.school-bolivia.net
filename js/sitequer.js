@@ -134,7 +134,7 @@ parseUri.options = {
                         }else if($(this).children("span").html()=="cerrar")
                         {
                             $(this).children("span").html("Ver Todo")
-                           $("#contentScroller").animate({"width":700},150); 
+                           $("#contentScroller").animate({"width":810},150); 
                         }
                         
                     });

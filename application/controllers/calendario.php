@@ -20,6 +20,8 @@ class Calendario extends CI_Controller
 		$salida['id_asignacion'] = $this->uri->segment(3);
 		setlocale(LC_TIME, 'Spanish');
 		$this->validarDatos();
+		$salida["asignar_id"]=$this->session->userdata("idA");
+		$salida["trimestre"]=$this->session->userdata("idT");
 		if ($this->form_validation->run() == false)
 		{
 			$salida = $this->muestraDatos($salida);
@@ -32,7 +34,6 @@ class Calendario extends CI_Controller
 		}
 
 	}
-
 	function validarDatos()
 	{
 		$reglas = 'trim|required';

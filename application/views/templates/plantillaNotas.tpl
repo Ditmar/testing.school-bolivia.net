@@ -4,6 +4,12 @@
 <fieldset><legend>Registro de notas</legend>
 <!--<div class="success" id="info"{$estiloInfo}>{$mensaje}</div>-->
 <ul class="iconmenu">
+	<li>
+		<a href="/Profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
+	</li>
+    <li>
+        <a href="/area/imprimePlantilla/{$asignar_id}/{$trimestre}"><img src="/css/icons/grid.png"/><span>Planilla de Notas</span></a>
+    </li>
     <li>
         <a href="/area/crearArea/{$asignar_id}/{$trimestre}"><img src="/css/icons/area.png"/><span>Crear area</span></a>
     </li>
@@ -37,12 +43,12 @@
 		<p class="titulo"> Trimestre {$trimestre}</p>
 	</div>
 	<div id="contentScroller" class="span-18 last">
-	<table class="buscartable" class="tabla registroNotas">
+	<table class="tabla registroNotas">
 		<tr>
-			<th rowspan="2"><div class="tlabel"> Nombre Estudiante</div></th>
+			<th rowspan="2"><div class="nombrelabel"> Nombre Estudiante</div></th>
 			{section loop=$area name=numeroDiv}
 			<th colspan="{$cantCriterios[numeroDiv]}" scope="col">
-            <div class="tlabel">
+            <div class="criterioslabel">
                 {$area[numeroDiv]}
 				
                     <div class="grupo_botones">
@@ -58,10 +64,10 @@
 			  </div>
             </div>
 			</th>
-			<th><div class="tlabel">{$totalArea[numeroDiv]}</div></th>
+			<th><div class="totallabel">{$totalArea[numeroDiv]}</div></th>
 			{/section}
 			<th rowspan="2">
-            <div class="tlabel">
+            <div class="totallabel">
                 Total
                 
             </div>

@@ -36,6 +36,12 @@ class Notamodel extends CI_Model
 		}
 
 	}
+	function eliminarPromedio($idArea)
+	{
+		$this->db->where("area_id",$idArea);
+		$this->db->delete("promedio_area");
+		return true;
+	}
 
 	function eliminarNotasCriterio($idCriterio)
 	{

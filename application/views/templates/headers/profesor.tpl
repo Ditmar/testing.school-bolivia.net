@@ -70,47 +70,8 @@
         <section class="maincontainer">
                <section class="content">
         <div class="container">
-    <div id="contentLeft" class="span-4">
-      <div class="maskuser">
-    	<img src="{php}echo imagenProfe(){/php}" height="150" width="150" /> 
-     </div> 
-      <div id="menu" class="menu-new" >
-		<ul>  
-		  <li><a href="#content">
-          <span class="texto">
-                    Mis Materias
-                </span>
-                <span class="f">></span>
-          </a>
-          	<ul class="submenu">
-		  		{php}
-                if(daMaterias() == true)
-            	{
-		  			foreach (misMaterias() as $id => $display) 
-                    {
- 				   		echo "<li><a href=\"/area/imprimePlantilla/$id/1\"><span class='texto'>$display T1</span><span class='f'>></span></a></li>";
- 				   		echo "<li><a href=\"/area/imprimePlantilla/$id/2\"><span class='texto'>$display T2</span><span class='f'>></span></a></li>";
- 				   		echo "<li><a href=\"/area/imprimePlantilla/$id/3\"><span class='texto'>$display T3</span><span class='f'>></span></a></li>";
-					}
-                 }
-                 else
-                 {
-                 	$display = "No tiene materias asignadas.";
-                 	echo "<li><a>$display</a></li>";
-                 }
-		  		{/php}
-			</ul>
-          </li> 		   
-		  <li><a href="/administrador/cerrarSesion">
-            <span class="texto"> 
-                Salir
-                </span>
-                <span class="f">></span>
-          </a></li> 
-		</ul> 
-	</div>
-	</div>
-	<div class="s_content">
+    fvff
+	<div class="s_content_profe">
     {if isset($smarty.get.mensaje)}
 		<div class="success" id="info">{$smarty.get.mensaje}</div>
 	{/if}

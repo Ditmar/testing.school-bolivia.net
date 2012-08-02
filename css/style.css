@@ -478,6 +478,19 @@ footer .bg_foother section .menuf nav ul li a:hover{
     padding:10px;
     min-height:250px;
 }
+.s_content_profe{
+    float:left;
+    width:900px;
+    margin-left:20px;
+    -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-border-radius:5px;
+    background:#fff;
+    behavior: url(../PIE.htc);
+    margin-top:-30px;
+    padding:10px;
+    min-height:250px;
+}
 #login_form{
     
 }
@@ -584,6 +597,50 @@ tfoot {font-style:italic;}
     background:#60762E;
     height:40px;
     padding:5px;
+}
+.nombrelabel
+{
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:#60762E;
+    height:40px;
+    padding:5px;
+	width:230px;
+	font-size:12px;
+	font-weight:bold;
+}
+.criterioslabel
+{
+	-moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:#60762E;
+    height:40px;
+    padding:5px;
+	font-size:12px;
+	font-weight:bold;
+}
+.nombreAlumnoinsertar
+{
+	font-size:10px;
+}
+.criAlumnoinsertar
+{
+	width:50px;
+	font-size:9px;
+}
+.totallabel
+{
+	-moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:#60762E;
+    height:40px;
+    padding:5px;
+	font-size:10px;
+	font-weight:bold;
+	width:40px;
 }
 .minmenu
 {

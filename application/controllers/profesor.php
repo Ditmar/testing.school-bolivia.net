@@ -15,7 +15,11 @@ class Profesor extends CI_Controller
 		if(!esProfesor())
 		redirect("administrador/iniciarSesion");
 		$salida = materiasDictaProfesor();
-		$this->smarty->view("profesor/bienvenido.tpl",$salida);
+
+			$salida["loadInterface"]=true;
+			$this->smarty->view("profesor/bienvenido.tpl",$salida);
+			
+		
 	}
 
 	function contratarProfe()

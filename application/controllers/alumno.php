@@ -1,7 +1,10 @@
 <?php
 class Alumno extends CI_Controller {
 
-    function __construct() {
+    
+	
+	
+	function __construct() {
         parent::__construct();
         autorizar_ingreso();
         $this->Auth->allowedActions = array('admin_attach');
@@ -65,6 +68,7 @@ class Alumno extends CI_Controller {
     }
 
     function guardarlista() {
+    	
         $idcurso = $this->input->post("id");
         $idmd5=$this->input->post("hashtag");
         $this->form_validation->set_rules("id","id","integer|required");
