@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-08-01 05:43:25
+<?php /* Smarty version 2.6.26, created on 2012-08-02 19:12:22
          compiled from headers/profesor.tpl */ ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,7 +76,6 @@ unset($_smarty_tpl_vars);
         <section class="maincontainer">
                <section class="content">
         <div class="container">
-    fvff
 	<div class="s_content_profe">
     <?php if (isset ( $_GET['mensaje'] )): ?>
 		<div class="success" id="info"><?php echo $_GET['mensaje']; ?>
