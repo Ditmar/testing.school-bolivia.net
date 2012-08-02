@@ -70,7 +70,6 @@
         <section class="maincontainer">
                <section class="content">
         <div class="container">
-    fvff
 	<div class="s_content_profe">
     {if isset($smarty.get.mensaje)}
 		<div class="success" id="info">{$smarty.get.mensaje}</div>
