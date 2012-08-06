@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-08-02 05:11:26
+<?php /* Smarty version 2.6.26, created on 2012-08-06 22:26:30
          compiled from registrarArea.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/profesor.tpl", 'smarty_include_vars' => array()));
@@ -16,7 +16,7 @@ unset($_smarty_tpl_vars);
 <legend>Registrar Area</legend>
 <ul class="iconmenu">
 	<li>
-		<a href="/Profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
+		<a href="/profesor/bienvenido"><img src="/css/icons/materias.png"/><span>Mis Materias</span></a>	
 	</li>
     <li>
         <a href="/area/imprimePlantilla/<?php echo $this->_tpl_vars['asignar_id']; ?>

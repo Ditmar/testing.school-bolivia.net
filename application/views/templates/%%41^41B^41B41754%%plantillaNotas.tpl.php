@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-08-02 19:41:27
+<?php /* Smarty version 2.6.26, created on 2012-08-06 22:26:12
          compiled from plantillaNotas.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/profesor.tpl", 'smarty_include_vars' => array()));

@@ -182,6 +182,14 @@ section .basic_back div h4{
 section .bg_back .content_header{
     width:950px;
     margin:0 auto;
+    padding-top:20px;
+}
+section .bg_back .content_header iframe
+{
+	display:block;
+	margin-left:155px;
+	border:6px solid #fff;
+	border-radius:10px;
 }
 section .bg_back nav{
     margin-top:20px;

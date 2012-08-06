@@ -42,38 +42,8 @@
         <section class="main_slider">
             <div class="bg_back">
                 <div class="content_header">
-                    <div class="slider">
-                        <ul class="imgsliders">
-                            <li>
-                                <img id="img1"   src="/images/bg1.jpg" alt="" />    
-                            </li>
-                            <li>
-                                <img id="img2" src="/images/bg2.jpg" alt="" />    
-                            </li>
-                            <li>
-                                <img id="img3"  src="/images/bg3.jpg" alt=""/>   
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="listasmov">
-                        <ul>
-                            <li>
-                                <a href="#" id="link_1" class="releasepush" key="1">    
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" id="link_2" class="releasepush" key="2">
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" id="link_3" class="releasepush" key="3">
-                                    
-                                </a>
-                            </li>    
-                        </ul>
-                    </div>
+					<iframe width="640" height="360" src="http://www.youtube.com/embed/W9LvseJSoAk" frameborder="0" allowfullscreen></iframe>       
+                 </div>
                 </div>
             </div>
         </section>
