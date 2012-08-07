@@ -372,6 +372,10 @@ footer .bg_foother section .menuf nav{
     margin-top:10px;
     
 }
+footer .bg_foother section .menuf nav ul li {
+	display:inline-block;
+	vertical-align:top;
+}
 footer .bg_foother section .menuf .colegios{
     width:270px;
 }
