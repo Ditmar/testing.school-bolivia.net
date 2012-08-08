@@ -28,6 +28,7 @@
     <li>
        <a  href="/documentos/subirArchivo/{$asignar_id}"><img src="/css/icons/upload.png"/><span>Subir documentos</span> </a> 
     </li>
+    
     <li>
         <!-- Enlace a Jquery-->
         <a href="#" id="btnmostrar">
@@ -36,6 +37,9 @@
     </li>
     <li>
         <a href="{php}echo site_url("profesor/bienvenido");{/php}"> <img src="/css/icons/return.png"/> <span>volver</span></a>
+    </li>
+    <li>
+       <a  href="/administrador/cerrarSesion"><img src="/css/icons/logout.png"/><span>Salir</span> </a> 
     </li>
 </ul>
 <table>

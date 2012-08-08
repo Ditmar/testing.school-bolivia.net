@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-08-06 22:26:30
+<?php /* Smarty version 2.6.26, created on 2012-08-08 05:00:32
          compiled from registrarArea.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/profesor.tpl", 'smarty_include_vars' => array()));
@@ -45,6 +45,7 @@ unset($_smarty_tpl_vars);
        <a  href="/documentos/subirArchivo/<?php echo $this->_tpl_vars['asignar_id']; ?>
 "><img src="/css/icons/upload.png"/><span>Subir documentos</span> </a> 
     </li>
+    
     <li>
         <!-- Enlace a Jquery-->
         <a href="#" id="btnmostrar">
@@ -53,6 +54,9 @@ unset($_smarty_tpl_vars);
     </li>
     <li>
         <a href="<?php echo site_url("profesor/bienvenido"); ?>"> <img src="/css/icons/return.png"/> <span>volver</span></a>
+    </li>
+    <li>
+       <a  href="/administrador/cerrarSesion"><img src="/css/icons/logout.png"/><span>Salir</span> </a> 
     </li>
 </ul>
 <table>
