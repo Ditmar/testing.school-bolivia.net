@@ -1,10 +1,20 @@
-<?php /* Smarty version 2.6.26, created on 2012-02-20 02:21:56
+<?php /* Smarty version 2.6.26, created on 2012-09-16 05:32:50
          compiled from verCalendarioAlumno.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "headers/alumno.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+<?php echo '
+	<script>
+		$(document).ready(function(){
+			
+			fecha=new Date();
+			var timeline = new Timeline("timeline", fecha);
+		});	
+	</script>
+'; ?>
+
 <form id="form1" name="form1" method="post" action="" class="prepend-1 span-18 append-1 prepend-top">
   <table class="buscartable">
     <caption>
@@ -24,16 +34,9 @@ unset($_smarty_tpl_vars);
     </tr>
    </table>
 </form>
-<table class="buscartable">
-  <caption>
-    Resultados
-  </caption>
-  <tr>
-    <th>Dia</th>
-    <th>Mes</th>
-    <th>Materia</th>
-    <th>Tarea</th>
-  </tr>
+
+  <div id="timeline">
+  <ul>
   <?php if ($this->_tpl_vars['totalResultados'] > 0): ?>
   <?php unset($this->_sections['contAlum']);
 $this->_sections['contAlum']['loop'] = is_array($_loop=$this->_tpl_vars['vec']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
@@ -62,24 +65,14 @@ $this->_sections['contAlum']['last']       = ($this->_sections['contAlum']['iter
   <?php $_from = $this->_tpl_vars['listaTareas'][$this->_sections['contAlum']['index']]; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['tareas']):
 ?>
-  <tr>
-    <td><?php echo $this->_tpl_vars['tareas']['dia']; ?>
-</td>
-    <td><?php echo $this->_tpl_vars['tareas']['mes']; ?>
-</td>
-    <td><?php echo $this->_tpl_vars['tareas']['nombre_materia']; ?>
-</td>
-    <td><?php echo $this->_tpl_vars['tareas']['descripcion']; ?>
-</td>
-  </tr>
+  <li class="Actividad" title="<?php echo $this->_tpl_vars['tareas']['fecha']; ?>
+"><?php echo $this->_tpl_vars['tareas']['descripcion']; ?>
+</li>
   <?php endforeach; endif; unset($_from); ?>
   <?php endfor; endif; ?>
-  <?php else: ?>
-  <tr>
-    <td colspan="4">No se encontraron tareas.</td>
-  </tr>
   <?php endif; ?>
-</table>
+</ul>
+</div>
 <br>
 <a href="/alumno/bienvenido"> Volver al menu principal</a><?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "footers/alumno.tpl", 'smarty_include_vars' => array()));

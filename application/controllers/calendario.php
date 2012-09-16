@@ -105,26 +105,37 @@ class Calendario extends CI_Controller
 		if(!esProfesor())
 		redirect("administrador/iniciarSesion");
 		$id_asignacion = $this->uri->segment(3);
-		$tipo = '';
+		$tipo = "hoy";
 		$listaTareas = array();
 		$salida = array();
 		$salida['id_asignacion'] = $id_asignacion;
 		$fechaHoy = date('d/m/Y');
 		$hoyUnix = $this->fechaUnix($fechaHoy);
-		if ($this->input->post('btnMosTareas') != false)
+		$datooo=$this->input->post('btnMosTareas');
+		if ($this->input->post('filtrarTarea') != "")
 		{
 			if(isset($_POST['filtrarTarea']))
 				$tipo = $this->input->post('filtrarTarea');
+		}else{
+			$tipo="hoy";
 		}
-		else
-				$tipo = 'hoy';
-		if($tipo == 'hoy')
+		/*if($tipo == "hoy")
+		{
 			$listaTareas = $this->calendariomodel->buscarTareas($hoyUnix,$id_asignacion,'=');
-		if($tipo == 'proximas')
+			
+		}
+		if($tipo == "proximas")
+		{
 			$listaTareas = $this->calendariomodel->buscarTareas($hoyUnix,$id_asignacion,'>');
-		if($tipo == 'pasadas')
+			
+		}
+		if($tipo == "pasadas")
+		{
 			$listaTareas = $this->calendariomodel->buscarTareas($hoyUnix,$id_asignacion,'<');
-
+				
+		}*/
+		$listaTareas = $this->calendariomodel->buscarTareas($id_asignacion);
+        $listaTareas=$this->listaChange($listaTareas);
 		$salida['listaTareas'] = $listaTareas;
 		$salida['totalResultados'] = count($listaTareas);
 		$this->smarty->view('verCalendario.tpl',$salida);
@@ -155,17 +166,40 @@ class Calendario extends CI_Controller
 				$tipo = $this->input->post('filtrarTarea');
 		}
 		
-		if($tipo == 'hoy')
+		/*if($tipo == 'hoy')
 			$listaTareas = $this->calendariomodel->obtenerTareasAlumno($hoyUnix,$salida['vec'],$totmat,'=');
 		if($tipo == 'proximas')
 			$listaTareas = $this->calendariomodel->obtenerTareasAlumno($hoyUnix,$salida['vec'],$totmat,'>');
 		if($tipo == 'pasadas')
-			$listaTareas = $this->calendariomodel->obtenerTareasAlumno($hoyUnix,$salida['vec'],$totmat,'<');
-
+			$listaTareas = $this->calendariomodel->obtenerTareasAlumno($hoyUnix,$salida['vec'],$totmat,'<');*/
+        $listaTareas = $this->calendariomodel->obtenerTareasAlumno($hoyUnix,$salida['vec'],$totmat);
+        $aux;
+        for($i=0;$i<count($listaTareas);$i++)
+        {
+            for($j=0;$j<count($listaTareas[$i]);$j++)
+            {
+                $aux=explode("-",$listaTareas[$i][$j]["fecha"]);
+                $listaTareas[$i][$j]["fecha"]=$aux[1]."-".$aux[2]."-".$aux[0];
+            }
+        } 
+        
+        //print_r($listaTareas);
+        
+		//$listaTareas=$this->listaChange($listaTareas);
 		$salida['listaTareas'] = $listaTareas;
 		$salida['totalResultados'] = count($listaTareas);
         
 		$this->smarty->view('verCalendarioAlumno.tpl',$salida);
 	}
+    function listaChange($listaTareas)
+    {
+            
+        $aux;
+        for($i=0;$i<count($listaTareas);$i++){
+            $aux=explode('-',$listaTareas[$i]["fecha"]);
+            $listaTareas[$i]["fecha"]=$aux[1]."-".$aux[2]."-".$aux[0]; 
+        }
+        return $listaTareas;
+    }
 }
 ?>

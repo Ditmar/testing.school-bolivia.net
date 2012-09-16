@@ -26,21 +26,37 @@ class Calendariomodel extends CI_Model
 		$this->db->query($tareaQuery);
 	}
 
-	function buscarTareas($hoyUnix,$id_asignacion,$signo)
+	/*function buscarTareas($hoyUnix,$id_asignacion,$signo)
 	{
 		$fechaSQL = ' AND fecha_unix_stamp ' . $signo. $hoyUnix. '';
 		$asignaSQL = ' AND 	asignar_id = ' . $id_asignacion. '';
 		$detallesQuery= 'SELECT * FROM calendario WHERE 1=1'.$fechaSQL.$asignaSQL.' ORDER BY fecha_unix_stamp';
 		$asociadosQuery = $this->db->query($detallesQuery);
 		return $asociadosQuery->result_array();
-	}
+	}*/
+    function buscarTareas($id_asignacion)
+    {
+        $fecha=date("Y-m-d");
+        //echo $fecha;
+        $a=explode('-',$fecha);
+        //echo "-> ".$a[0];
+        $this->db->where("anio",$a[0]);
+        $this->db->where("asignar_id",$id_asignacion);   
+        $result=$this->db->get("calendario");
+        //echo "->". count($result->result_array());
+        return $result->result_array();
+    }
 
-	function obtenerTareasAlumno($hoyUnix,$id_asignacion,$cant,$signo)
+	function obtenerTareasAlumno($hoyUnix,$id_asignacion,$cant)
 	{
+	    $fecha=date("Y-m-d");
+        $a=explode('-',$fecha);
+        
 		$todos = array();
 		for($i=0;$i<$cant;$i++)
 		{
-			$fechaSQL = ' AND fecha_unix_stamp ' . $signo. $hoyUnix. '';
+			$fechaSQL = ' AND anio='.$a[0];
+			
 			$asignaSQL = ' AND 	D.asignar_id = ' . $id_asignacion[$i]. '';
 			$detallesQuery= 'select D.*,nombre_materia from calendario as D,asignar_materia as A,materia as M where D.asignar_id=A.asignar_id and A.materia_id=M.materia_id'.$fechaSQL.$asignaSQL.' ORDER BY fecha_unix_stamp';
             $asociadosQuery = $this->db->query($detallesQuery);

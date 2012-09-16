@@ -14,12 +14,11 @@
         <link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css'>
         <link href='/js/jqtransform.css' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="/css/registroNotas.css"/>
+        <link href="/css/timeline.css" rel="stylesheet" type="text/css"/>
         <!--[if lte IE 8]>
             <script src="/js/html5.js" type="text/javascript"></script>
         <![endif]-->
-        <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
-        <script type="text/javascript" src="/js/sitequer.js" ></script>
-
+       
   
 </head>
 <body>

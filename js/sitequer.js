@@ -104,12 +104,15 @@ parseUri.options = {
                         }
                         
                     });
-                    $(".menu-new ul li a").click(function(){
+                    
+                    /*$(".menu-new ul li a").click(function(e){
+                        e.preventDefault();
+                        console.debug("in");
                         var uri=$(this).attr("href");
                         if($(this).attr("open")=="true"){
                            $(this).attr("open","false");
                            $(this).css("background-color","#D9DCD1");
-                           $(".submenu").hide(150);
+                           $(".submenu").hide(500);
                            //background-color:#D9DCD1;
                         }else{
                            $(this).css("background-color","#2B3D0E");
@@ -121,8 +124,8 @@ parseUri.options = {
                             
                         }
                         
-                    });
-                    $(".submenu").hide();
+                    });*/
+                    //$(".submenu").hide();
                     
                     /*
                     Transformación de formularios comunes y corrientes

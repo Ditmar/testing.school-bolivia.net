@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2012-05-28 02:16:35
+<?php /* Smarty version 2.6.26, created on 2012-09-16 05:32:46
          compiled from headers/alumno.tpl */ ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,6 +12,7 @@ unset($_smarty_tpl_vars);
  ?>
   <!--  Mis estilos  -->
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/timeline.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Atomic+Age' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>

@@ -1,4 +1,13 @@
 {include file="headers/alumno.tpl"}
+{literal}
+	<script>
+		$(document).ready(function(){
+			
+			fecha=new Date();
+			var timeline = new Timeline("timeline", fecha);
+		});	
+	</script>
+{/literal}
 <form id="form1" name="form1" method="post" action="" class="prepend-1 span-18 append-1 prepend-top">
   <table class="buscartable">
     <caption>
@@ -18,32 +27,17 @@
     </tr>
    </table>
 </form>
-<table class="buscartable">
-  <caption>
-    Resultados
-  </caption>
-  <tr>
-    <th>Dia</th>
-    <th>Mes</th>
-    <th>Materia</th>
-    <th>Tarea</th>
-  </tr>
+
+  <div id="timeline">
+  <ul>
   {if $totalResultados > 0}
   {section loop=$vec name=contAlum}
   {foreach from=$listaTareas[contAlum] key=key item=tareas}
-  <tr>
-    <td>{$tareas.dia}</td>
-    <td>{$tareas.mes}</td>
-    <td>{$tareas.nombre_materia}</td>
-    <td>{$tareas.descripcion}</td>
-  </tr>
+  <li class="Actividad" title="{$tareas.fecha}">{$tareas.descripcion}</li>
   {/foreach}
   {/section}
-  {else}
-  <tr>
-    <td colspan="4">No se encontraron tareas.</td>
-  </tr>
   {/if}
-</table>
+</ul>
+</div>
 <br>
 <a href="/alumno/bienvenido"> Volver al menu principal</a>{include file="footers/alumno.tpl"}

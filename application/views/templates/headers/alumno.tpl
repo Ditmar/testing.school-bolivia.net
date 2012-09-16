@@ -6,6 +6,7 @@
   {include file="scripts.tpl"}
   <!--  Mis estilos  -->
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/timeline.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Atomic+Age' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
