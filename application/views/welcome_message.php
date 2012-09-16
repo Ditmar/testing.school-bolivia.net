@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            My School
+            School-Bolivia
         </title>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'/>
