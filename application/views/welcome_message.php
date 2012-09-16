@@ -14,7 +14,7 @@
         <![endif]-->
         <script src="/js/jquery.js"></script>
         <script src="/js/sitequer.js"></script>
-    	
+    	<link rel="icon" type="image/x-icon" href="/images/ico.png" />
     </head>
     <body>
     <div id="fb-root"></div>

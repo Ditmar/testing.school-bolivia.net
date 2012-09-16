@@ -2,6 +2,8 @@
 
 class Libreta extends CI_Controller
 {
+    var $nombreCVS=array();
+    var $dataCVS=array();
 	function __construct()
 	{
 		parent::__construct();
@@ -90,11 +92,25 @@ class Libreta extends CI_Controller
 			if($respuesta == false)
 				$flag = 1;
 		}
-		
-		if($flag == 1)
+        $this->load->library("zip");
+        for($i=0; $i<count($this->nombreCVS);$i++)
+        {
+            //echo $this->nombreCVS[$i];
+            $this->zip->add_data($this->nombreCVS[$i],$this->dataCVS[$i]);   
+        }
+        $this->zip->archive($_SERVER["DOCUMENT_ROOT"]."/cvs/".$nombreCurso."_".$id_curso.".zip");
+        if(count($this->nombreCVS)>0)
+        {
+            $this->zip->download($nombreCurso."_".$id_curso.".zip");    
+        }else
+        {
+            redirect('administrador/bienvenido?mensaje=NO+se+pudieron+guardar+los+archivos');    
+            
+        }
+        /*if($flag == 1)
 			redirect('administrador/bienvenido?mensaje=NO+se+pudieron+guardar+los+archivos');
 		else
-			redirect('administrador/bienvenido?mensaje=Los+archivos+se+generaron+satisfactoriamente');
+			redirect('administrador/bienvenido?mensaje=Los+archivos+se+generaron+satisfactoriamente');*/
 	}
 	
 	function llenaCvs($idAlumno,$nombreCsv)
@@ -111,17 +127,19 @@ class Libreta extends CI_Controller
 		$newline = "\r\n";
 		$data = $this->dbutil->csv_from_result($query, $delimiter, $newline); 
 		$this->load->helper('file');
-        
-		$path = 'file:///C:/libretas/'.$nombreCsv;
+        $arreglo=array();
+		$path = $nombreCsv;
 		//write_file('c:/libretas/prueba1.txt',$data);
-        if ( ! write_file($path, $data))
+        /*if ( ! write_file($path, $data))
 		{
 		     return false;
 		}
 		else
-		{
-		     return true;
-		}
+		{*/
+		    $this->nombreCVS[]=$path;
+		    $this->dataCVS[]=$data;
+		    return true;
+		/*}*/
 		
 	}
 }

@@ -18,8 +18,11 @@
         <!--[if lte IE 8]>
             <script src="/js/html5.js" type="text/javascript"></script>
         <![endif]-->
-       
-  
+       <link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="/images/ico.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/ico.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/images/ico.png">
+  	<link rel="icon" type="image/x-icon" href="/images/ico.png" />
 </head>
 <body>
   

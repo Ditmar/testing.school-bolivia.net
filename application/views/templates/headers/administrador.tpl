@@ -22,6 +22,11 @@
         <script type="text/javascript" src="/js/jquery.jqtransform.js" ></script>
         <script type="text/javascript" src="/js/sitequer.js" ></script>
         <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js" ></script>
+<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="/images/ico.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/ico.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/images/ico.png">
+<link rel="icon" type="image/x-icon" href="/images/ico.png" />
 <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
         
 <script>
