@@ -27,7 +27,7 @@
             <nav>
                 <ul class="menu">
                     <li>
-                        <a href="/">Inicio</a>
+                        <a href="/">Dinamica de Sistemas</a>
                     </li>
                     <li>
                         <a href="nosotros/">Nosotros</a>
